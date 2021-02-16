@@ -1,0 +1,3 @@
+Commande pour démarer le serveur local dans le terminal :
+
+php -S localhost:8000 -t public
