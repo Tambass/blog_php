@@ -30,7 +30,10 @@ class Router {
     {
         $match = $this->router->match();
         $view = $match['target'];
-        require $this->viewPath . $view . '.php';
+        ob_start();
+        require $this->viewPath . DIRECTORY_SEPARATOR . $view . '.php';
+        $content = ob_get_clean();
+        require $this->viewPath . DIRECTORY_SEPARATOR . 'layouts/default.php';
 
         return $this;
     }
