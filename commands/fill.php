@@ -37,6 +37,7 @@ foreach($posts as $post) {
     }
 }
 
-
+$password = password_hash('admin', PASSWORD_BCRYPT);
+$pdo->exec("INSERT INTO user SET username='admin', password='$password'");
 
 // Exécuter la commande : php commands/fill.php (dans le terminal)
