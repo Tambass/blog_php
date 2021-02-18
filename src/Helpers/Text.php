@@ -7,6 +7,9 @@ class Text {
         if(mb_strlen($content) <= $limit) {
             return $content;
         }
-        return substr($content, 0, $limit) . '...';
+        //Fonction pour trouver une chaine de caractère précise
+        $lastSpace = mb_stripos($content, ' ', $limit);
+
+        return mb_substr($content, 0, $lastSpace) . '...';
     }
 }
