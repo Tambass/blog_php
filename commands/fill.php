@@ -21,4 +21,8 @@ for ($i = 0; $i < 50; $i++){
     $pdo->exec("INSERT INTO post SET name='{$faker->sentence()}', slug='{$faker->slug}', created_at='{$faker->date} {$faker->time}', content='{$faker->paragraphs(rand(3,15), true)}'");
 }
 
+for ($i = 0; $i < 5; $i++){
+    $pdo->exec("INSERT INTO category SET name='{$faker->sentence(3)}', slug='{$faker->slug}'");
+}
+
 // Exécuter la commande : php commands/fill.php (dans le terminal)
