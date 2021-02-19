@@ -2,21 +2,14 @@
 use App\Helpers\Text;
 use App\Model\Post;
 use App\Connection;
+use App\URL;
 
 $title = 'Mon Blog';
 // Connection à la base de données
-$pdo = Connection::getPDO;
+$pdo = Connection::getPDO();
 
-$page = $_GET['page'] ?? 1;
-// Filtrer les url
-if (!filter_var($page, FILTER_VALIDATE_INT)) {
-    throw new Exception('Numéro de page invalide !');
-}
 // Page courrente
-$currentPage = (int)$page;
-if($currentPage <= 0) {
-    throw new Exception('Numéro de page invalide !');
-}
+$currentPage = URL::getPositiveInt('page', 1);
 // Sauvegarde du nombre d'article dans la variable $count
 $count = (int)$pdo->query('SELECT COUNT(id) FROM post')->fetch(PDO::FETCH_NUM)[0];
 // Sauvegarde du nombre de page dans la variable $pages arrondi au chiffre supérieur
