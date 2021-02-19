@@ -27,7 +27,7 @@ $router = new App\Router(dirname(__DIR__) . '/views');
 //Affichage des routes ('URL', 'CHEMIN', 'NOM DE LA PAGE')
 $router
     ->get('/', 'post/index', 'home')
+    ->get('/blog/category/[*:slug]-[i:id]', 'category/show', 'category')
     ->get('/blog/[*:slug]-[i:id]', 'post/show', 'post')
-    ->get('/blog/category', 'category/show', 'category')
     //Lancer le router
     ->run();
