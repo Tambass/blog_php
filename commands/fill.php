@@ -1,13 +1,12 @@
 <?php
+use App\Connection;
 //Faker -> générateur de contenu lorem ipsum aléatoire
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 $faker = Faker\Factory::create('fr_FR');
 
 // Connection à la base de données
-$pdo = new PDO('mysql:dbname=tutoblog;host=127.0.0.1', 'root', '', [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-]);
+$pdo = Connection::getPDO();
 
 // Vider les tables
 $pdo->exec('SET FOREIGN_KEY_CHECKS = 0');

@@ -1,12 +1,11 @@
 <?php
 use App\Helpers\Text;
 use App\Model\Post;
+use App\Connection;
 
 $title = 'Mon Blog';
 // Connection à la base de données
-$pdo = new PDO('mysql:dbname=tutoblog;host=127.0.0.1', 'root', '', [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-]);
+$pdo = Connection::getPDO;
 
 $page = $_GET['page'] ?? 1;
 // Filtrer les url
