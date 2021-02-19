@@ -9,6 +9,10 @@ $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
+function e (string $string) {
+    return htmlentities($string);
+}
+
 if(isset($_GET['page']) && $_GET['page'] === '1') {
     // réécrire l'url sans le paramètre ?page
     $uri = explode('?', $_SERVER['REQUEST_URI'])[0];
