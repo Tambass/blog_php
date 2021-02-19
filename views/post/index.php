@@ -12,13 +12,6 @@ $page = $_GET['page'] ?? 1;
 if (!filter_var($page, FILTER_VALIDATE_INT)) {
     throw new Exception('Numéro de page invalide !');
 }
-// Etre redirigé vers l'url canonique de home, pour le référencement
-if ($page === '1') {
-    header('Location: ' . $router->url('home'));
-    http_response_code(301);
-    exit();
-}
-
 // Page courrente
 $currentPage = (int)$page;
 if($currentPage <= 0) {
