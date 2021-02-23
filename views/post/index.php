@@ -3,6 +3,7 @@ use App\URL;
 use App\Connection;
 use App\Model\Post;
 use App\Helpers\Text;
+use App\Model\Category;
 use App\PaginatedQuery;
 
 $title = 'Mon Blog';
@@ -14,6 +15,22 @@ $paginatedQuery = new PaginatedQuery(
     "SELECT COUNT(id) FROM post"
 );
 $posts = $paginatedQuery->getItems(Post::class);
+$postsByID = [];
+foreach($posts as $post) {
+    $postsByID[$post->getID()] = $post;
+}
+$categories = $pdo
+    ->query('SELECT c.*, pc.post_id
+             FROM post_category pc
+             JOIN category c ON c.id = pc.category_id
+             WHERE pc.post_id IN (' . implode(',', array_keys($postsByID)) . ')'
+    )->fetchAll(PDO::FETCH_CLASS, Category::class);
+
+// On parcourt les catégories
+foreach($categories as $category) {
+    $postsByID[$category->getPostID()]->addCategory($category);
+}
+
 $link = $router->url('home');
 ?>
 
